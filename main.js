@@ -68,9 +68,9 @@ ScrollReveal().reveal(".home-content p, .about-content", { origin: "right" });
 ====================== */
 const typed = new Typed(".multiple-text", {
   strings: ["Frontend Developer", "Full Stack Web Developer", "UI/UX Designer"],
-  typeSpeed: 100,
-  backSpeed: 100,
-  backDelay: 1000,
+  typeSpeed: 80,
+  backSpeed: 80,
+  backDelay: 400,
   loop: true,
 });
 
