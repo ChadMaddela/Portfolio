@@ -166,32 +166,27 @@
     =========================================== -->
     <section class="contact" id="contact">
       <h2 class="heading">Contact <span>Me</span></h2>
-
-      <form>      
+    
+      <div class="contact-info">
         <div class="contact number">&#x260E; Phone: +63 968 582 8970</div>
         <div class="email">Email: charlesmaddela@gmail.com</div>
-      </form>
-
-      <!-- <form action="#">
+      </div>
+    
+      <form id="contactForm">  <!-- Ensure this ID matches -->
         <div class="input-box">
-          <input type="text" placeholder="Full Name" />
-          <input type="email" placeholder="Email Address" />
+          <input type="text" id="fullName" placeholder="Full Name" required />
+          <input type="email" id="email" placeholder="Email Address" required />
         </div>
-
+    
         <div class="input-box">
-            <input id="number" type="text" placeholder="Mobile Number" />
-          <input type="text" placeholder="Email Subject" />
+          <input id="mobileNumber" type="text" placeholder="Mobile Number" required />
+          <input type="text" id="subject" placeholder="Email Subject" required />
         </div>
-        
-        <textarea
-          name=""
-          id=""
-          cols="30"
-          rows="10"
-          placeholder="Your Message"
-        ></textarea>
+    
+        <textarea id="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
         <input type="submit" value="Send Message" class="btn" />
-      </form> -->
+      </form>
+    </section>
 
   <!-- ==========================================
             Footer
@@ -224,6 +219,54 @@
                   Custom Js
     =========================================== -->
     <script src="main.js"></script>
+
+    <!-- ==========================================
+                  Email Js
+    =========================================== -->
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+
+    <script type="text/javascript">
+      (function(){
+          emailjs.init({
+            publicKey: "JPS4NYlmFhEYl5ur9",
+          });
+      })();
+
+      document.getElementById("contactForm").addEventListener("submit", function(event){
+      event.preventDefault();  // Prevent default form submission
+
+      // Get form values
+      var fullName = document.getElementById("fullName").value;
+      var email = document.getElementById("email").value;
+      var mobileNumber = document.getElementById("mobileNumber").value;
+      var subject = document.getElementById("subject").value;
+      var message = document.getElementById("message").value;
+
+      // Send email using EmailJS
+      emailjs.send("service_4fda297", "template_nzoxu0h", {
+        fullName: fullName,
+        email: email,
+        mobileNumber: mobileNumber,
+        subject: subject,
+        message: message,
+      })
+      .then(function(response) {
+        alert("Message sent successfully!");
+        document.getElementById("contactForm").reset();  // Clear the form
+      }, function(error) {
+        alert("Failed to send the message. Please try again.");
+      });
+
+      console.log(document.getElementById("fullName")); // Should not be null
+      console.log(document.getElementById("email")); // Should not be null
+      console.log(document.getElementById("mobileNumber")); // Should not be null
+      console.log(document.getElementById("subject")); // Should not be null
+      console.log(document.getElementById("message")); // Should not be null
+    });
+    </script>
+
 
     
   </body>
