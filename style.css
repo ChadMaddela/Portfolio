@@ -381,6 +381,13 @@ span {
   margin-bottom: 3rem;
 }
 
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .contact form .input-box {
   display: flex;
   justify-content: space-between;
