@@ -3,21 +3,26 @@ name: Sync to GitLab
 on:
   push:
     branches:
-      - main
+      - main  # Adjust if needed
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout full history
+      - name: Checkout full repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Required for full history
 
-      - name: Push to GitLab
+      - name: Push branches and tags to GitLab
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/charlesmaddela/Portfolio.git
-          git push --mirror gitlab
+          
+          # Push all branches
+          git push gitlab --force --all
+          
+          # Push all tags
+          git push gitlab --force --tags
